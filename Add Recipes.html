@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(145, 178, 195);
+        }
+    
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            
+            
+        }
+  
+
+        .group {
+            margin-bottom: 20px;
+            box-shadow: 10px 10px whitesmoke;
+           
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error-message {
+            color: red;
+        }
+        .group:hover{
+            color: darkgreen;
+        }
+        .Submit:hover{
+            color: darkgreen;
+        }
+        ul{
+            text-align: center;
+            background-color: black;
+            
+        }
+
+        .navbar{
+            color:white;
+
+        }
+        
+    
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+            
+                <ul>
+                    <div class="navbar">
+        <h1>Add your Recipe</h1>
+    </div>
+    </ul>
+    
+    
+        <form id="recipeForm">
+            <div class="group">
+                <label for="recipeTitle">Recipe Title:</label>
+                <input type="text" id="recipeTitle" name="recipeTitle" required>
+                <span class="error-message" id="titleError"></span>
+            </div>
+            <div class="group">
+                <label for="ingredients">Ingredients:</label>
+                <textarea id="ingredients" name="ingredients" rows="4" required></textarea>
+                <span class="error-message" id="ingredientsError"></span>
+            </div>
+            <div class="group">
+                <label for="instructions">Instructions:</label>
+                <textarea id="instructions" name="instructions" rows="4" required></textarea>
+                <span class="error-message" id="instructionsError"></span>
+            </div>
+            <div class="group">
+                <label for="cookingTime">Cooking Time (minutes):</label>
+                <input type="number" id="cookingTime" name="cookingTime" min="1" required>
+                <span class="error-message" id="cookingTimeError"></span>
+            </div>
+            <div class="Submit">
+               
+            <button type="Submit">Submit</button>
+        </div>
+        </form>
+    </div>
+
+    <script>
+       
+        const recipeForm = document.getElementById('recipeForm');
+        const titleInput = document.getElementById('recipeTitle');
+        const ingredientsInput = document.getElementById('ingredients');
+        const instructionsInput = document.getElementById('instructions');
+        const cookingTimeInput = document.getElementById('cookingTime');
+        const titleError = document.getElementById('titleError');
+        const ingredientsError = document.getElementById('ingredientsError');
+        const instructionsError = document.getElementById('instructionsError');
+        const cookingTimeError = document.getElementById('cookingTimeError');
+
+        recipeForm.addEventListener('submit', function (e) {
+            let valid = true;
+
+            if (titleInput.value.trim() === '') {
+                titleError.textContent = 'Title is required';
+                valid = false;
+            } else {
+                titleError.textContent = '';
+            }
+
+            if (ingredientsInput.value.trim() === '') {
+                ingredientsError.textContent = 'Ingredients are required';
+                valid = false;
+            } else {
+                ingredientsError.textContent = '';
+            }
+
+            if (instructionsInput.value.trim() === '') {
+                instructionsError.textContent = 'Instructions are required';
+                valid = false;
+            } else {
+                instructionsError.textContent = '';
+            }
+
+            if (cookingTimeInput.value.trim() === '' || isNaN(cookingTimeInput.value) || parseInt(cookingTimeInput.value) <= 0) {
+                cookingTimeError.textContent = 'Cooking time must be a positive number';
+                valid = false;
+            } else {
+                cookingTimeError.textContent = '';
+            }
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
